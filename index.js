@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
-const timerRouter = require('./routes/timer.routes')
+const timerRouter = require("./routes/timer.routes");
 const PORT = 8080;
 const app = express();
 let mime = require("mime");
@@ -11,13 +11,13 @@ const zlib = require("zlib");
 app.use(cors());
 app.use(express.json());
 app.use("/api", userRouter);
-app.use("/timer",timerRouter)
-process.on('SIGTERM', () => {
-    console.log('Process terminated')
-  })
-  process.on('SIGINT', () => {
-    console.log('Process terminated')
-  })
+app.use("/timer", timerRouter);
+process.on("SIGTERM", () => {
+  console.log("Process terminated");
+});
+process.on("SIGINT", () => {
+  console.log("Process terminated");
+});
 app.post("/download", function (req, res) {
   // let buf = "";
   req.setEncoding("base64");
@@ -38,7 +38,7 @@ app.post("/download", function (req, res) {
       // res.setHeader("Content-disposition", "attachment; filename=test1.jpeg");
       // const myMime = new Mime()
       // res.setHeader("Content-type", "image/jpeg");
-      
+
       res.send("ok");
     } catch (error) {
       console.log(error);
