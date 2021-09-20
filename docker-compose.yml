@@ -1,0 +1,40 @@
+version: "3.9"
+volumes:
+  pg_project:
+  pg_back:
+services:
+  backend:
+    # image: node
+    build: .
+    container_name: block_backend
+    working_dir: /app
+    # command: node index.js
+    # command: npm run nodemon index.js
+    ports:
+      - "8080:8080"
+    volumes:
+      # - /Users/user/Documents/restapi:/app
+      - ./:/app
+      - /app/node_modules
+    #command: node index.js
+    depends_on:
+      - pg_db
+  pg_db:
+    image: postgres
+    restart: always
+    container_name: block_db
+    working_dir: /app
+    environment:
+      #- POSTGRES_PASSWORD=
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=vlad
+      - POSTGRES_USER=vlad
+      - POSTGRES_DB=node_postgres
+    volumes:
+      #- pg_project:/Users/user/Library/Application Support/Postgres/var-13
+
+      # - ./pg_project:/var/lib/postgresql/data
+       - ./db_postgres:/var/lib/postgresql/data
+    ports:
+      #- ${POSTGRES_PORT:-5435}:5435
+      - "5432:5432"

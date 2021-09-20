@@ -1,0 +1,16 @@
+const Router = require("express");
+const { authenticateToken } = require("../controllers/user.controller");
+const userController = require("../controllers/user.controller");
+const router = new Router();
+// const UserController = require('../controllers/user.controller')
+router.post("/user", userController.createUser);
+router.get("/user", authenticateToken, userController.getUsers);
+//router.get('/user',userController.getUsers)
+router.get("/user/:id", authenticateToken, userController.getOneUser);
+router.put("/user", userController.updateUser);
+router.delete("/user/:id", userController.deleteUser);
+router.post("/register", userController.register);
+router.post("/login", userController.login);
+router.post("/decodetoken",userController.decodetoken);
+router.put("/activity",userController.createActivity)
+module.exports = router;
