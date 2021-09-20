@@ -1,3 +1,3 @@
-node_modules
-pg_project
-db_postgres
+/node_modules
+/pg_project
+/db_postgres
