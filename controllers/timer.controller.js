@@ -33,5 +33,18 @@ class TimerController {
     console.log("proverochka", result.rows);
     res.json({ result: result.rows });
   };
+  getActivitiesDistinct = async (req, res) => {
+    const userID = req.params.id;
+    console.log("userID:", userID);
+    // const result = await db.query(
+    //   `select distinct "activity_name" from "activities" where "activity_user_id"=$1`,
+    //   [userID]
+    // );
+    const result = await db.query(
+      `select distinct activity_name from activities where "activity_user_id"=${userID}`
+    );
+    console.log(result.rows);
+    res.json({ result: result.rows });
+  };
 }
 module.exports = new TimerController();
